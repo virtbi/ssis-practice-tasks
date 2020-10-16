@@ -1,0 +1,396 @@
+﻿<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="5/16/2020 11:18:48 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="DESKTOP-3IN22QV"
+  DTS:CreatorName="DESKTOP-3IN22QV\Gundu"
+  DTS:DTSID="{367FAF12-2DBB-4961-8C13-7FEEFE6449C0}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.68"
+  DTS:LocaleID="1033"
+  DTS:ObjectName="FST-OperationUseCases"
+  DTS:PackageType="5"
+  DTS:VersionBuild="19"
+  DTS:VersionGUID="{0B9FE88D-64C5-47B6-B9C4-D7164D993BAF}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ArchiveFiles]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{2E504D88-B1D9-4E4B-AF9D-B34F9719A50D}"
+      DTS:ObjectName="ArchiveFiles">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="3"
+          DTS:ConnectionString="F:\Practice Tasks\FileSystemTask\ArchiveFiles" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[ArchiveFolder_yyyymmdd]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{929CDD79-1CBA-4FB2-A6C3-38A18B651879}"
+      DTS:ObjectName="ArchiveFolder_yyyymmdd">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="3"
+          DTS:ConnectionString="F:\Practice Tasks\NonProd_Archive\ArchiveFolder_yyyymmdd" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[FileSystemTask]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{BB8C60C6-7DCA-4E33-B6A9-99D4251A81AF}"
+      DTS:ObjectName="FileSystemTask">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:FileUsageType="2"
+          DTS:ConnectionString="F:\Practice Tasks\FileSystemTask" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[HCAHPS - National.csv]"
+      DTS:CreationName="FILE"
+      DTS:DTSID="{1DED553A-CD3C-4EA5-A532-7C0722DDD614}"
+      DTS:ObjectName="HCAHPS - National.csv">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[User::File]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables>
+    <DTS:Variable
+      DTS:CreationName=""
+      DTS:DTSID="{8209A557-36AA-4EF6-A889-D421D92AB975}"
+      DTS:IncludeInDebugDump="2345"
+      DTS:Namespace="User"
+      DTS:ObjectName="File">
+      <DTS:VariableValue
+        DTS:DataType="8"
+        xml:space="preserve"></DTS:VariableValue>
+    </DTS:Variable>
+  </DTS:Variables>
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\Create Directory"
+      DTS:CreationName="Microsoft.FileSystemTask"
+      DTS:Description="File System Task"
+      DTS:DTSID="{FE5139E5-DE03-4512-8A90-E826CE28C6D6}"
+      DTS:ExecutableType="Microsoft.FileSystemTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Create Directory"
+      DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FileSystemData
+          TaskOperationType="CreateDirectory"
+          TaskOverwriteDestFile="True"
+          TaskSourcePath="{2E504D88-B1D9-4E4B-AF9D-B34F9719A50D}" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Delete Source Directory"
+      DTS:CreationName="Microsoft.FileSystemTask"
+      DTS:Description="File System Task"
+      DTS:DTSID="{744A61AF-92CC-406F-BAD9-5498CB925670}"
+      DTS:ExecutableType="Microsoft.FileSystemTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Delete Source Directory"
+      DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FileSystemData
+          TaskOperationType="DeleteDirectoryContent"
+          TaskSourcePath="{BB8C60C6-7DCA-4E33-B6A9-99D4251A81AF}" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Foreach Loop Container"
+      DTS:CreationName="STOCK:FOREACHLOOP"
+      DTS:Description="Foreach Loop Container"
+      DTS:DTSID="{CF6AEEB2-5968-43E5-829B-CFE57AE15221}"
+      DTS:ExecutableType="STOCK:FOREACHLOOP"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Foreach Loop Container">
+      <DTS:ForEachEnumerator
+        DTS:CreationName="Microsoft.ForEachFileEnumerator"
+        DTS:DTSID="{3883EE11-2390-4638-BCA1-6651ADCCFD45}"
+        DTS:ObjectName="{3883EE11-2390-4638-BCA1-6651ADCCFD45}">
+        <DTS:ObjectData>
+          <ForEachFileEnumeratorProperties>
+            <FEFEProperty
+              Folder="F:\Practice Tasks\FileSystemTask\" />
+            <FEFEProperty
+              FileSpec="*.*" />
+            <FEFEProperty
+              FileNameRetrievalType="0" />
+            <FEFEProperty
+              Recurse="0" />
+          </ForEachFileEnumeratorProperties>
+        </DTS:ObjectData>
+      </DTS:ForEachEnumerator>
+      <DTS:Variables />
+      <DTS:Executables>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Archive Attribute set"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:Description="File System Task"
+          DTS:DTSID="{64A20290-8ECA-4D2C-8496-3B860227872B}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Archive Attribute set"
+          DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOperationType="SetAttributes"
+              TaskSourcePath="{1DED553A-CD3C-4EA5-A532-7C0722DDD614}"
+              TaskFileAttributes="Archive" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+        <DTS:Executable
+          DTS:refId="Package\Foreach Loop Container\Copy files to Dir"
+          DTS:CreationName="Microsoft.FileSystemTask"
+          DTS:Description="File System Task"
+          DTS:DTSID="{4B259A10-DF24-4E33-9E57-8A867B6C7709}"
+          DTS:ExecutableType="Microsoft.FileSystemTask"
+          DTS:LocaleID="-1"
+          DTS:ObjectName="Copy files to Dir"
+          DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+          DTS:ThreadHint="0">
+          <DTS:Variables />
+          <DTS:ObjectData>
+            <FileSystemData
+              TaskOverwriteDestFile="True"
+              TaskSourcePath="{1DED553A-CD3C-4EA5-A532-7C0722DDD614}"
+              TaskDestinationPath="{2E504D88-B1D9-4E4B-AF9D-B34F9719A50D}" />
+          </DTS:ObjectData>
+        </DTS:Executable>
+      </DTS:Executables>
+      <DTS:PrecedenceConstraints>
+        <DTS:PrecedenceConstraint
+          DTS:refId="Package\Foreach Loop Container.PrecedenceConstraints[Constraint]"
+          DTS:CreationName=""
+          DTS:DTSID="{00138B63-FA8D-4844-9797-7E10A0A5CEFA}"
+          DTS:From="Package\Foreach Loop Container\Archive Attribute set"
+          DTS:LogicalAnd="True"
+          DTS:ObjectName="Constraint"
+          DTS:To="Package\Foreach Loop Container\Copy files to Dir" />
+      </DTS:PrecedenceConstraints>
+      <DTS:ForEachVariableMappings>
+        <DTS:ForEachVariableMapping
+          DTS:CreationName=""
+          DTS:DTSID="{80446FE1-EF70-4084-A8F8-99E57B10EC8C}"
+          DTS:ObjectName="{80446FE1-EF70-4084-A8F8-99E57B10EC8C}"
+          DTS:ValueIndex="0"
+          DTS:VariableName="User::File" />
+      </DTS:ForEachVariableMappings>
+    </DTS:Executable>
+    <DTS:Executable
+      DTS:refId="Package\Move ArchiveFiles to NonProd Env"
+      DTS:CreationName="Microsoft.FileSystemTask"
+      DTS:Description="File System Task"
+      DTS:DTSID="{4B0315B7-DBA4-4435-87F9-221D04AE91D4}"
+      DTS:ExecutableType="Microsoft.FileSystemTask"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="Move ArchiveFiles to NonProd Env"
+      DTS:TaskContact="File System Task;Microsoft Corporation; SQL Server 2019; © 2019 Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1"
+      DTS:ThreadHint="0">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <FileSystemData
+          TaskOperationType="MoveDirectory"
+          TaskOverwriteDestFile="True"
+          TaskSourcePath="{2E504D88-B1D9-4E4B-AF9D-B34F9719A50D}"
+          TaskDestinationPath="{929CDD79-1CBA-4FB2-A6C3-38A18B651879}" />
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:PrecedenceConstraints>
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint]"
+      DTS:CreationName=""
+      DTS:DTSID="{4B6758C6-773B-4B72-88C1-6B553805CF13}"
+      DTS:From="Package\Create Directory"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint"
+      DTS:To="Package\Foreach Loop Container" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 1]"
+      DTS:CreationName=""
+      DTS:DTSID="{989620A4-0288-4383-B0DE-173F559BEC79}"
+      DTS:From="Package\Foreach Loop Container"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 1"
+      DTS:To="Package\Move ArchiveFiles to NonProd Env" />
+    <DTS:PrecedenceConstraint
+      DTS:refId="Package.PrecedenceConstraints[Constraint 2]"
+      DTS:CreationName=""
+      DTS:DTSID="{596F0A90-C741-4645-8263-E96F5C74FA65}"
+      DTS:From="Package\Move ArchiveFiles to NonProd Env"
+      DTS:LogicalAnd="True"
+      DTS:ObjectName="Constraint 2"
+      DTS:To="Package\Delete Source Directory" />
+  </DTS:PrecedenceConstraints>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="16" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="154,42"
+          Id="Package\Create Directory"
+          TopLeft="129.999994834264,50.613333735572" />
+        <NodeLayout
+          Size="189,42"
+          Id="Package\Delete Source Directory"
+          TopLeft="116.66666203075,438.880003487905" />
+        <NodeLayout
+          Size="171,42"
+          Id="Package\Foreach Loop Container\Archive Attribute set"
+          TopLeft="25.7333274788329,25.7600013554891" />
+        <NodeLayout
+          Size="151,42"
+          Id="Package\Foreach Loop Container\Copy files to Dir"
+          TopLeft="31.5999860922501,96.0533351902432" />
+        <EdgeLayout
+          Id="Package\Foreach Loop Container.PrecedenceConstraints[Constraint]"
+          TopLeft="109.266656785542,67.3600013554891">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,28.6933338347541"
+              Start="0,0"
+              End="0,21.1933338347541">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,21.1933338347541" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <ContainerLayout
+          HeaderHeight="43"
+          IsExpanded="True"
+          PanelSize="225,155"
+          Size="225,198"
+          Id="Package\Foreach Loop Container"
+          TopLeft="121.999995152156,120.640000958761" />
+        <NodeLayout
+          Size="239,42"
+          Id="Package\Move ArchiveFiles to NonProd Env"
+          TopLeft="93.3333296245994,364.693336231655" />
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint]"
+          TopLeft="207.199994834264,92.213333735572">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="27.200000317892,28.426667223189"
+              Start="0,0"
+              End="27.200000317892,20.926667223189">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,10.2133336115945" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,10.2133336115945"
+                    Point2="0,14.2133336115945"
+                    Point3="4,14.2133336115945" />
+                  <mssgle:LineSegment
+                    End="23.200000317892,14.2133336115945" />
+                  <mssgle:CubicBezierSegment
+                    Point1="23.200000317892,14.2133336115945"
+                    Point2="27.200000317892,14.2133336115945"
+                    Point3="27.200000317892,18.2133336115945" />
+                  <mssgle:LineSegment
+                    End="27.200000317892,20.926667223189" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 1]"
+          TopLeft="234.399995152156,319.040000958761">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-21.4666655275566,45.6533352728943"
+              Start="0,0"
+              End="-21.4666655275566,38.1533352728943">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,18.8266676364472" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,18.8266676364472"
+                    Point2="0,22.8266676364472"
+                    Point3="-4,22.8266676364472" />
+                  <mssgle:LineSegment
+                    End="-17.4666655275566,22.8266676364472" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-17.4666655275566,22.8266676364472"
+                    Point2="-21.4666655275566,22.8266676364472"
+                    Point3="-21.4666655275566,26.8266676364472" />
+                  <mssgle:LineSegment
+                    End="-21.4666655275566,38.1533352728943" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package.PrecedenceConstraints[Constraint 2]"
+          TopLeft="211.999995827675,406.293336231655">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,32.5866672562497"
+              Start="0,0"
+              End="0,25.0866672562497">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,25.0866672562497" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>
